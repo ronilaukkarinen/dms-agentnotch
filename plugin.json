@@ -1,0 +1,12 @@
+{
+    "id": "agentNotch",
+    "name": "Agent Notch",
+    "description": "Real-time AI coding assistant telemetry for Claude Code in your DankBar",
+    "version": "1.0.0",
+    "author": "Roni Laukkarinen",
+    "icon": "smart_toy",
+    "type": "widget",
+    "component": "./AgentNotchWidget.qml",
+    "settings": "./AgentNotchSettings.qml",
+    "permissions": ["settings_read", "settings_write"]
+}
