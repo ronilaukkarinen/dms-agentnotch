@@ -13,6 +13,8 @@
 
 ---
 
+<img width="1201" height="459" alt="image" src="https://github.com/user-attachments/assets/0253cf84-c37c-4a34-8a38-45ed5ffa36fa" />
+
 ## What is Agent Notch?
 
 Agent Notch is a DankMaterialShell plugin that brings real-time AI coding assistant telemetry to your DankBar. It monitors **Claude Code** sessions and displays what your AI assistant is doing at any moment &mdash; thinking, reading files, editing code, running commands &mdash; all without leaving your editor.
