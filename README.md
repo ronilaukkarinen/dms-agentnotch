@@ -118,6 +118,3 @@ Agent Notch runs 100% locally. It reads only local JSONL files on your machine a
 
 Ported from [AgentNotch](https://github.com/AppGram/agentnotch) by AppGram, originally a macOS Swift app for the Mac notch area.
 
-## License
-
-MIT

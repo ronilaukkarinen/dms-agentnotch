@@ -311,7 +311,7 @@ PluginComponent {
                             StyledText {
                                 text: root.getStatusText()
                                 font.pixelSize: Theme.fontSizeMedium
-                                font.weight: Font.Bold
+                                font.weight: Font.Medium
                                 color: root.isWorking() ? root.sourceColor : Theme.surfaceText
                             }
 
@@ -352,15 +352,24 @@ PluginComponent {
                         }
 
                         Row {
+                            id: tokenRow
                             width: parent.width
-                            spacing: Theme.spacingM
+                            spacing: 0
+
+                            property int visibleCount: {
+                                var c = 2
+                                if (root.sessionState.tokenUsage.cacheReadInputTokens > 0) c++
+                                if (root.sessionState.tokenUsage.cacheCreationInputTokens > 0) c++
+                                return c
+                            }
 
                             Column {
+                                width: tokenRow.width / tokenRow.visibleCount
                                 spacing: 2
                                 StyledText {
                                     text: Parser.formatTokenCount(root.sessionState.tokenUsage.inputTokens)
                                     font.pixelSize: Theme.fontSizeMedium
-                                    font.weight: Font.Bold
+                                    font.weight: Font.Medium
                                     color: Theme.surfaceText
                                 }
                                 StyledText {
@@ -371,11 +380,12 @@ PluginComponent {
                             }
 
                             Column {
+                                width: tokenRow.width / tokenRow.visibleCount
                                 spacing: 2
                                 StyledText {
                                     text: Parser.formatTokenCount(root.sessionState.tokenUsage.outputTokens)
                                     font.pixelSize: Theme.fontSizeMedium
-                                    font.weight: Font.Bold
+                                    font.weight: Font.Medium
                                     color: Theme.surfaceText
                                 }
                                 StyledText {
@@ -386,12 +396,13 @@ PluginComponent {
                             }
 
                             Column {
+                                width: tokenRow.width / tokenRow.visibleCount
                                 spacing: 2
                                 visible: root.sessionState.tokenUsage.cacheReadInputTokens > 0
                                 StyledText {
                                     text: Parser.formatTokenCount(root.sessionState.tokenUsage.cacheReadInputTokens)
                                     font.pixelSize: Theme.fontSizeMedium
-                                    font.weight: Font.Bold
+                                    font.weight: Font.Medium
                                     color: "#4CAF50"
                                 }
                                 StyledText {
@@ -402,12 +413,13 @@ PluginComponent {
                             }
 
                             Column {
+                                width: tokenRow.width / tokenRow.visibleCount
                                 spacing: 2
                                 visible: root.sessionState.tokenUsage.cacheCreationInputTokens > 0
                                 StyledText {
                                     text: Parser.formatTokenCount(root.sessionState.tokenUsage.cacheCreationInputTokens)
                                     font.pixelSize: Theme.fontSizeMedium
-                                    font.weight: Font.Bold
+                                    font.weight: Font.Medium
                                     color: "#FFC107"
                                 }
                                 StyledText {
@@ -454,26 +466,34 @@ PluginComponent {
                         Repeater {
                             model: root.sessionState.recentTools
 
-                            Row {
-                                width: recentToolsColumn.width - Theme.spacingM * 2
-                                spacing: Theme.spacingS
+                            Item {
+                                width: recentToolsColumn.width
+                                height: toolNameText.implicitHeight
 
                                 DankIcon {
+                                    id: toolIcon
                                     name: Parser.getToolIcon(modelData.toolName)
                                     size: Theme.iconSize - 6
                                     color: Theme.surfaceVariantText
                                     anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
                                 }
 
                                 StyledText {
+                                    id: toolNameText
                                     text: Parser.getToolDisplayName(modelData.toolName)
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceText
-                                    width: parent.width * 0.6
                                     elide: Text.ElideRight
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: toolIcon.right
+                                    anchors.leftMargin: Theme.spacingS
+                                    anchors.right: toolElapsed.left
+                                    anchors.rightMargin: Theme.spacingS
                                 }
 
                                 StyledText {
+                                    id: toolElapsed
                                     text: {
                                         if (modelData.endTime && modelData.startTime) {
                                             var ms = modelData.endTime - modelData.startTime
@@ -485,6 +505,7 @@ PluginComponent {
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     anchors.verticalCenter: parent.verticalCenter
+                                    anchors.right: parent.right
                                 }
                             }
                         }
