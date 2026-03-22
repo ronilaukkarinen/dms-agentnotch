@@ -56,10 +56,10 @@ PluginComponent {
         }
     }
 
-    // Permission check: if a tool runs > 2.5s without result
+    // Permission check: if a permission-eligible tool runs > 5s without result
     Timer {
         id: permissionTimer
-        interval: 2500
+        interval: 5000
         repeat: true
         running: root.sessionState.activeTools.length > 0
         onTriggered: {
@@ -71,7 +71,7 @@ PluginComponent {
                 var tool = root.sessionState.activeTools[i]
                 if (Parser.isPermissionEligible(tool.toolName)) {
                     var elapsed = now - tool.startTime
-                    if (elapsed >= 2500) {
+                    if (elapsed >= 5000) {
                         needsPermission = true
                         pendingTool = tool.toolName
                         break

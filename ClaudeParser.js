@@ -28,19 +28,21 @@ function createSessionState() {
     };
 }
 
-// Tools that typically require permission approval
-var permissionEligibleTools = [
-    "Bash", "Edit", "Write", "NotebookEdit",
-    "mcp__", "computer"
+// Tools that never need permission (always auto-approved)
+var autoApprovedTools = [
+    "Read", "Glob", "Grep", "LS", "TodoWrite", "TodoRead",
+    "TaskCreate", "TaskUpdate", "TaskGet", "TaskList",
+    "Agent", "WebSearch", "WebFetch"
 ];
 
 function isPermissionEligible(toolName) {
-    for (var i = 0; i < permissionEligibleTools.length; i++) {
-        if (toolName.indexOf(permissionEligibleTools[i]) === 0) {
-            return true;
+    for (var i = 0; i < autoApprovedTools.length; i++) {
+        if (toolName === autoApprovedTools[i]) {
+            return false;
         }
     }
-    return false;
+    // Everything else (Bash, Edit, Write, NotebookEdit, mcp__, etc.) may need permission
+    return true;
 }
 
 // Parse a single JSONL line and update session state

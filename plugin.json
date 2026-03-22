@@ -2,7 +2,7 @@
     "id": "agentNotch",
     "name": "Agent Notch",
     "description": "Real-time AI coding assistant telemetry for Claude Code in your DankBar",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Roni Laukkarinen",
     "icon": "smart_toy",
     "type": "widget",
