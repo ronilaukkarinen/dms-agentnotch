@@ -1,4 +1,4 @@
-<h1 align="center">Agent Notch</h1>
+<h1 align="center">Agent Notch for dms 🐧</h1>
 
 <p align="center">
   <strong>Real-time AI coding assistant telemetry for DankMaterialShell</strong>
